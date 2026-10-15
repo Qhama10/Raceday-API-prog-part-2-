@@ -52,7 +52,7 @@ builder.Services.AddSwaggerGen(c =>
             { Type = ReferenceType.SecurityScheme, Id = "Bearer" } }, Array.Empty<string>() }
     });
 });
-
+builder.Services.AddHttpClient<IWeatherService, OpenMeteoWeatherService>();
 var app = builder.Build();
 
 app.UseSwagger();

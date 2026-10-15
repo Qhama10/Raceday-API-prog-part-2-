@@ -42,4 +42,9 @@ public class RaceDayDbContext : DbContext
         b.Entity<Result>().HasOne<Organiser>().WithMany()
             .HasForeignKey(r => r.UpdatedBy).OnDelete(DeleteBehavior.Restrict);
     }
+    public record EventMapResponse(int EventId, string EventName, string EventLocation, string KnownLocation,
+    double Latitude, double Longitude, string GoogleMapsUrl, string EmbedUrl);
+
+    public record EventWeatherResponse(int EventId, string EventName, string KnownLocation,
+        double TemperatureC, double WindSpeedKmh, string Summary, string Source);
 }
