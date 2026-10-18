@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.37628.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raceday API (prog part 2)", "Raceday API (prog part 2).csproj", "{9A496C19-5C69-46A1-866C-DBA85E531AF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceDay.Tests", "..\RaceDay.Tests\RaceDay.Tests.csproj", "{F67E34D1-DCE4-CB77-53AF-4628C8AFD96F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceDay.Tests", "RaceDay.Tests\RaceDay.Tests.csproj", "{F67E34D1-DCE4-CB77-53AF-4628C8AFD96F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
