@@ -6,13 +6,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Raceday_API__prog_part_2_.Data;
 using Raceday_API__prog_part_2_.Dtos;
+using Raceday_API__prog_part_2_.Services;
 
 namespace RaceDay.Tests;
 
 // Starts your real API in memory, but swaps SQL Server for a throwaway in-memory database.
+public class FakeWeatherService : IWeatherService
+{
+    public bool Fail { get; set; }
+    public Task<WeatherInfo?> GetCurrentAsync(double latitude, double longitude, CancellationToken ct = default)
+        => Task.FromResult<WeatherInfo?>(Fail ? null : new WeatherInfo(24.5, 12.0, 1, "Mainly clear / partly cloudy"));
+}
+
 public class ApiFactory : WebApplicationFactory<Program>
 {
     private readonly string _db = "Tests-" + Guid.NewGuid();
+    public FakeWeatherService Weather { get; } = new();
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -21,6 +30,11 @@ public class ApiFactory : WebApplicationFactory<Program>
             foreach (var d in services.Where(d => d.ServiceType == typeof(DbContextOptions<RaceDayDbContext>)).ToList())
                 services.Remove(d);
             services.AddDbContext<RaceDayDbContext>(o => o.UseInMemoryDatabase(_db));
+
+            // Use a fake weather service so the tests never call the internet.
+            foreach (var d in services.Where(d => d.ServiceType == typeof(IWeatherService)).ToList())
+                services.Remove(d);
+            services.AddSingleton<IWeatherService>(Weather);
         });
     }
 }
@@ -44,6 +58,7 @@ public static class Helpers
         var body = (await login.Content.ReadFromJsonAsync<LoginResponse>())!;
         c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", body.Token);
         return c;
+
     }
     public static EventRequest SampleEvent(string name = "Test Marathon") => new()
     {
