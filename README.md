@@ -72,6 +72,8 @@ An event at an unknown location returns `404`. If the weather service is unreach
 The database is created from the EF Core model (code-first, `InitialCreate` migration). To view the data in Visual Studio: View → SQL Server Object Explorer → (localdb)\MSSQLLocalDB → Databases → RaceDay → Tables → right-click a table → View Data.
 
 ## CI/CD
+<img width="996" height="262" alt="ci-green-build" src="https://github.com/user-attachments/assets/c602e103-96b0-4931-9ec0-bc43a7863341" />
+
 
 GitHub Actions (`.github/workflows/part2-ci.yml`) restores, builds and runs all unit tests on every push.
 
@@ -90,4 +92,4 @@ GitHub Actions (`.github/workflows/part2-ci.yml`) restores, builds and runs all 
 
 ## Video
 
-Unlisted YouTube link: _add here_
+Unlisted YouTube link: https://youtu.be/N-2SKjOqnGs?si=J1H-SErfbjxvpED3
